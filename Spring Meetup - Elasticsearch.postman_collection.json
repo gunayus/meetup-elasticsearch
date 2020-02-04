@@ -1,0 +1,717 @@
+{
+	"info": {
+		"_postman_id": "c3cc5893-b366-4991-b71e-e98adba64d34",
+		"name": "Spring Meetup - Elasticsearch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01_TF/IDF",
+			"item": [
+				{
+					"name": "Delete Index",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-tfidf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-tfidf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index document - 1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"spor etkinliklerinde kullanılan spor malzemeleri ve sporcuların besinleri spor yapan insanlar için önemlidir. mantar da önemli besin kaynaklarından birisidir\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-tfidf/_doc/D1?refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-tfidf",
+								"_doc",
+								"D1"
+							],
+							"query": [
+								{
+									"key": "refresh",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index document - 2",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"mantar çok çeşitli, renk ve büyüklük bakımından farklı özellikleri olan bir bitkidir. mantar üremelerini sağlayan özelliklere spor adı verilir. her bir mantar kendine has özelliklere sahiptir.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-tfidf/_doc/D2?refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-tfidf",
+								"_doc",
+								"D2"
+							],
+							"query": [
+								{
+									"key": "refresh",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index document - 3",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"konu ile hiç ilgisi olmayan bir makale için böyle şeylerin bir önemi anlamı yoktur.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-tfidf/_doc/D3?refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-tfidf",
+								"_doc",
+								"D3"
+							],
+							"query": [
+								{
+									"key": "refresh",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search documents",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": {\n    \"term\": {\n      \"description\": {\n        \"value\": \"mantar\"\n      }\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-tfidf/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-tfidf",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "02_Analyzers",
+			"item": [
+				{
+					"name": "Delete Index",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-music",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-music"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Index artists",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"index\" : { \"_id\" : \"A1\" } }\n{\"id\": \"A1\",\"type\": \"ARTIST\",\"ranking\": 1000,\"name\": \"Ben Fero\"}\n{ \"index\" : { \"_id\" : \"A2\" } }\n{\"id\": \"A2\",\"type\": \"ARTIST\",\"ranking\": 10000,\"name\": \"Ben Deniz\"}\n{ \"index\" : { \"_id\" : \"A3\" } }\n{\"id\": \"A3\",\"type\": \"ARTIST\",\"ranking\": 100000,\"name\": \"Müslüm Gürses\"}\n{ \"index\" : { \"_id\" : \"A4\" } }\n{\"id\": \"A4\",\"type\": \"ARTIST\",\"ranking\": 10,\"name\": \"Muşlu İlhan\"}\n"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-music/_bulk",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-music",
+								"_bulk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Index settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-music",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-music"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query - match 'müsl' name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\": {\n\t\t\"match\": {\n\t\t\t\"name\": \"müslüm\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-music/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-music",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - analyze - standard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"analyzer\": \"standard\",\n    \"text\": \"müslüm gürses\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/_analyze",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_analyze"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - analyze - custom",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"char_filter\": [\n        {\n            \"type\": \"mapping\",\n            \"mappings\": [\n                \"ü => u\",\n                \"ğ => g\"\n            ]\n        }\n    ],\n    \"tokenizer\": \"standard\",\n    \"filter\": [\n        \"lowercase\",\n        {\n            \"type\": \"edge_ngram\",\n            \"min_gram\": \"1\",\n            \"max_gram\": \"12\"\n        }\n    ],\n    \"text\": \"Müslüm Gürses\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/_analyze",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_analyze"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE - Index with custom analyzers",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"settings\": {\n        \"analysis\": {\n            \"filter\": {\n                \"front_ngram\": {\n                    \"type\": \"edge_ngram\",\n                    \"min_gram\": \"1\",\n                    \"max_gram\": \"12\"\n                }\n            },\n            \"analyzer\": {\n                \"i_prefix\": {\n                    \"filter\": [\n                        \"cjk_width\",\n                        \"lowercase\",\n                        \"asciifolding\",\n                        \"front_ngram\"\n                    ],\n                    \"tokenizer\": \"standard\"\n                },\n                \"i_prefix_wo_ascii\": {\n                    \"filter\": [\n                        \"cjk_width\",\n                        \"lowercase\",\n                        \"front_ngram\"\n                    ],\n                    \"tokenizer\": \"standard\"\n                },\n                \"q_prefix\": {\n                    \"filter\": [\n                        \"cjk_width\",\n                        \"lowercase\",\n                        \"asciifolding\"\n                    ],\n                    \"tokenizer\": \"standard\"\n                },\n                \"q_prefix_wo_ascii\": {\n                    \"filter\": [\n                        \"cjk_width\",\n                        \"lowercase\"\n                    ],\n                    \"tokenizer\": \"standard\"\n                }\n            }\n        }\n    },\n    \"mappings\": {\n        \"properties\": {\n            \"id\": {\n                \"type\": \"keyword\"\n            },\n            \"type\": {\n                \"type\": \"keyword\"\n            },\n            \"artist_id\": {\n                \"type\": \"keyword\"\n            },\n            \"ranking\": {\n                \"type\": \"double\"\n            },\n            \"name\": {\n                \"type\": \"text\",\n                \"index_options\": \"offsets\",\n                \"analyzer\": \"standard\",\n                \"position_increment_gap\": 100,\n                \"fields\": {\n                    \"prefix\": {\n                        \"type\": \"text\",\n                        \"term_vector\": \"with_positions_offsets\",\n                        \"index_options\": \"docs\",\n                        \"analyzer\": \"i_prefix\",\n                        \"search_analyzer\": \"q_prefix\"\n                    },\n                    \"prefix_wo_ascii\": {\n                        \"type\": \"text\",\n                        \"term_vector\": \"with_positions_offsets\",\n                        \"index_options\": \"docs\",\n                        \"analyzer\": \"i_prefix_wo_ascii\",\n                        \"search_analyzer\": \"q_prefix_wo_ascii\"\n                    }\n                }\n            },\n            \"artist_name\": {\n                \"type\": \"text\",\n                \"analyzer\": \"standard\",\n                \"index_options\": \"offsets\",\n                \"fields\": {\n                    \"prefix\": {\n                        \"type\": \"text\",\n                        \"term_vector\": \"with_positions_offsets\",\n                        \"index_options\": \"docs\",\n                        \"analyzer\": \"i_prefix\",\n                        \"search_analyzer\": \"q_prefix\"\n                    },\n                    \"prefix_wo_ascii\": {\n                        \"type\": \"text\",\n                        \"term_vector\": \"with_positions_offsets\",\n                        \"index_options\": \"docs\",\n                        \"analyzer\": \"i_prefix_wo_ascii\",\n                        \"search_analyzer\": \"q_prefix_wo_ascii\"\n                    }\n                },\n                \"position_increment_gap\": 100\n            }\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-music",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-music"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query - match 'müsl' name.prefix",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"query\": {\n\t\t\"match\": {\n\t\t\t\"name.prefix\": \"müsl\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-music/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-music",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query - multi-match 'müslü' 'muşlu'",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": {\n        \"multi_match\": {\n            \"query\": \"müslü\",\n            \"operator\": \"and\",\n            \"fields\": [\n                \"name.prefix^1\",\n                \"name.prefix_wo_ascii^3\"\n            ]\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-music/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-music",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "03_Scoring on ranking field",
+			"item": [
+				{
+					"name": "Query - multi-match & score on ranking",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": {\n    \"function_score\": {\n      \"boost_mode\": \"sum\",\n      \"score_mode\": \"sum\", \n      \"query\": {\n        \"multi_match\": {\n          \"query\": \"ben\",\n          \"fields\": [\n            \"name.prefix^1\",\n            \"name.prefix_wo_ascii^1\"\n          ]\n        }\n      },\n      \"functions\": [\n        {\n          \"script_score\": {\n              \"script\": {\n                  \"source\": \"Math.max(_score * ((!doc[\\\"ranking\\\"].empty ) ? Math.log(doc[\\\"ranking\\\"].value) : 1)  - _score , 0)\"\n              }\n          }\n        }\n      ]\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-music/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-music",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "04_personalization",
+			"item": [
+				{
+					"name": "Delete Event Index",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"index\" : { \"_id\" : \"A1\" } }\n{\"id\": \"A1\",\"type\": \"ARTIST\",\"ranking\": 1000,\"name\": \"Ben Fero\"}\n{ \"index\" : { \"_id\" : \"A2\" } }\n{\"id\": \"A2\",\"type\": \"ARTIST\",\"ranking\": 10000,\"name\": \"Ben Deniz\"}\n{ \"index\" : { \"_id\" : \"A3\" } }\n{\"id\": \"A3\",\"type\": \"ARTIST\",\"ranking\": 100000,\"name\": \"Müslüm Gürses\"}\n{ \"index\" : { \"_id\" : \"A4\" } }\n{\"id\": \"A4\",\"type\": \"ARTIST\",\"ranking\": 10,\"name\": \"Muşlu İlhan\"}\n"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event Index",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mappings\": {\n        \"properties\": {\n            \"event_type\": {\n                \"type\": \"keyword\"\n            },\n            \"user_id\": {\n                \"type\": \"keyword\"\n            },\n            \"artist_id\": {\n                \"type\": \"keyword\"\n            }\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INDEX  listen event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/personalized-search/event?userid=U2&artistid=A1&event-type=LISTEN",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personalized-search",
+								"event"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "U2"
+								},
+								{
+									"key": "artistid",
+									"value": "A1"
+								},
+								{
+									"key": "event-type",
+									"value": "LISTEN"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggregate Artists listened by Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"size\": 2, \n  \"query\": {\n    \"match_all\": {}\n  },\n  \"aggs\": {\n    \"users\": {\n      \"terms\": {\n        \"field\": \"user_id\"\n      },\n      \"aggs\": {\n        \"artists\": {\n          \"terms\": {\n            \"field\": \"artist_id\"\n          }\n        }\n      }\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-event/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-event",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggregate Artists listened by a User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"size\": 2,\n    \"query\": {\n        \"bool\": {\n            \"filter\": {\n                \"term\": {\n                    \"user_id\": \"U2\"\n                }\n            }\n        }\n    },\n    \"aggs\": {\n        \"artists\": {\n            \"terms\": {\n                \"field\": \"artist_id\"\n            }\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-event/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-event",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query - multi-match & score - personalized",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": {\n    \"function_score\": {\n      \"boost_mode\": \"sum\",\n      \"score_mode\": \"sum\", \n      \"query\": {\n        \"multi_match\": {\n          \"query\": \"ben\",\n          \"fields\": [\n            \"name.prefix^1\",\n            \"name.prefix_wo_ascii^1\"\n          ]\n        }\n      },\n      \"functions\": [\n        {\n          \"script_score\": {\n              \"script\": {\n              \t  \"source\": \"Math.max(_score * ((!doc[\\\"id\\\"].empty && doc[\\\"id\\\"].value == \\\"A1\\\") ?  5 : 1) * ((!doc[\\\"id\\\"].empty && doc[\\\"id\\\"].value == \\\"A2\\\") ?  2 : 1)  - _score , 0)\"\n              }\n          }\n        }\n      ]\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/meetup-music/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"meetup-music",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

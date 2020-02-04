@@ -1,0 +1,15 @@
+
+https://github.com/denji/awesome-http-benchmark
+
+curl -X GET http://localhost:8080/tfidf/search?q=spor
+
+http://localhost:8080/ranking-search/search?q=ben
+
+http://localhost:8080/personalized-search/search?q=ben&u=U1
+
+
+http://localhost:9200/meetup-tfidf/_doc/D1?refresh
+
+
+
+http://localhost:9200/meetup-music/_bulk
